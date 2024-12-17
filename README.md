@@ -77,8 +77,7 @@ Add the following in your AppDelegate to register for push notifications:
 import UIKit
 import feat_apns
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         HiAPNsManager.shared.setAPNsToken(deviceToken)
     }
@@ -101,11 +100,14 @@ HiAPNsManager.shared.requestNotificationAuthorization()
 
 ## **Permissions**
 
-Add the following key to your Info.plist file to request camera permission:
+Ensure you have the following permissions set in your Info.plist:
 
 ```
-<key>NSUserNotificationUsageDescription</key>
-<string>We use notifications to keep you updated with important information.</string>
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>                <!-- Background Fetch -->
+    <string>remote-notification</string>  <!-- Push Notification -->
+</array>
 ```
 
 ---
